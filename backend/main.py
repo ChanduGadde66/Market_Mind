@@ -1,21 +1,12 @@
-import sys
-import os
+import sys, os
 
-sys.path.append(
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "..")
-    )
-)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from routes.main_routes import router
 
-app = FastAPI(
-    title="MarketMind AI Backend",
-    version="1.0"
-)
-
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,10 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(router)
-
 
 @app.get("/")
 def root():
-    return {"message": "MarketMind Backend Running"}
+    return {"status":"running"}
